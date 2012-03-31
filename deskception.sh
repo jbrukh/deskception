@@ -1,17 +1,23 @@
 #!/bin/bash
-set -o errexit
-
-TMP_DIR="/tmp/deskception"
-NEW_DIR=$(date)
 DESKTOP=~/Desktop
+DATE=$(date) #(date "+%Y-%m-%d")
+NEW_DIR=$DESKTOP/$DATE
 
 # if the desktop is empty, do nothing
-if [ -z "$(ls $DESKTOP)" ]; then
-    exit
+if [ -z "$(ls $DESKTOP)" ]
+then
+    echo "Nothing to pack (skipping)"
+    exit 1
 fi
 
-mkdir -p "$TMP_DIR" && \
-mv $DESKTOP/* "$TMP_DIR"
-mkdir -p $DESKTOP/"$NEW_DIR" && \
-mv "$TMP_DIR"/* $DESKTOP/"$NEW_DIR" && \
-rm -rf "$TMP_DIR"
+mkdir -p "$NEW_DIR"
+if [ $? -ne 0 ]
+then
+    echo "Could not create new directory: $NEW_DIR"
+    exit 1
+fi
+
+find $DESKTOP -depth 1 -prune \
+              -not -name ".*" \
+              -not -name "$DATE" \
+              -exec mv {} "$NEW_DIR" \;
