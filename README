@@ -1,5 +1,7 @@
-deskception
+D E S K C E P T I O N
 Jake Brukhman (jbrukh@gmail.com)
+
+I noticed that periodically I would collect all the files on my desktop into a directory on my desktop. This process would happen iteratively. Now you can have your own "deskception" happen automatically.
 
 To install, create a cron job that periodically runs the deskception script:
 
