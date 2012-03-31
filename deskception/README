@@ -1,0 +1,10 @@
+deskception
+Jake Brukhman (jbrukh@gmail.com)
+
+To install, create a cron job that periodically runs the deskception script:
+
+    $ crontab -e
+
+and put in a weekly job:
+
+    @weekly /path/to/deskception.sh
